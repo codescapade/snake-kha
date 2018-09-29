@@ -21,7 +21,6 @@ class PlayState extends State {
 		food = new Food(Level.width, Level.height, this);
 		add(food);
 		
-
 		desiredDirection = new Vector2i(1, 0);
 	}
 

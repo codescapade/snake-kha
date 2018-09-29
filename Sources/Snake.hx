@@ -1,7 +1,6 @@
 package;
 
 import kha.math.Vector2i;
-import kha.graphics2.Graphics;
 import kha.Color;
 
 class Snake {
@@ -54,13 +53,6 @@ class Snake {
 		}		
 	}
 
-	// public function render(graphics:Graphics):Void {
-	// 	for (segment in body) {
-	// 		segment.render(graphics);
-	// 	}
-	// 	head.render(graphics);
-	// }
-
 	public function hit(x:Int, y:Int):Bool {
 		return head.hit(x, y) || hitSelf(x, y);
 	}
@@ -69,7 +61,6 @@ class Snake {
 		var segment = new Sprite(x, y, 12, 12, SNAKE_COLOR);
 		state.add(segment);
 		return segment;
-		// return new Sprite(x, y, 12, 12, SNAKE_COLOR);
 	}
 
 	private function invalidDirection(direction:Vector2i):Bool {

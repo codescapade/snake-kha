@@ -1,11 +1,6 @@
 package;
 
-import kha.math.Random;
 import kha.input.Keyboard;
-import kha.math.Vector2i;
-import kha.Scaler;
-import kha.Color;
-import kha.Image;
 import kha.System;
 import kha.Scheduler;
 import kha.Framebuffer;
@@ -25,6 +20,7 @@ class Game {
 
 	public function switchState(newState:State):Void {
 		currentState.destroy();
+		newState.game = this;
 		currentState = newState;
 	}
 
@@ -43,11 +39,10 @@ class Game {
 	}
 
 	private function loadFinished():Void {
-		
 		timer = new Timer();
 
 		currentState = initialState;
-
+		currentState.game = this;
 		Scheduler.addTimeTask(update, 0, 1 / 60);
 		System.notifyOnFrames(render);
 		Keyboard.get().notify(Controls.instance.keyDown, Controls.instance.keyUp);

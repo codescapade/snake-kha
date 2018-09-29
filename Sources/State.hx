@@ -9,6 +9,8 @@ import kha.Color;
 class State {
 	public var bgColor = Color.fromString('#000000');
 	
+	public var game:Game;
+	
 	private var backBuffer:Image;
 
 	private var gameObjects:Array<GameObject>;

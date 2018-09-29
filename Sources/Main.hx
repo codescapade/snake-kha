@@ -12,7 +12,7 @@ class Main {
 		System.start({title: "Project", width: 640, height: 480}, function (_) {
 			var seed:Int = Math.floor(Math.random() * 1000000);
 			Random.init(seed);
-			new Game(new PlayState());
+			new Game(new MenuState());
 		});
 	}
 }
