@@ -1,5 +1,6 @@
 package;
 
+import kha.math.Random;
 import kha.Assets;
 import kha.Framebuffer;
 import kha.Scheduler;
@@ -9,7 +10,9 @@ class Main {
 
 	public static function main() {
 		System.start({title: "Project", width: 640, height: 480}, function (_) {
-			new Game();
+			var seed:Int = Math.floor(Math.random() * 1000000);
+			Random.init(seed);
+			new Game(new PlayState());
 		});
 	}
 }

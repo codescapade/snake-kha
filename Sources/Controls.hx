@@ -3,13 +3,15 @@ package;
 import kha.input.KeyCode;
 
 class Controls {
+	public static var instance:Controls = new Controls();
+	
 	public var left = false;
 	public var right = false;
 	public var up = false;
 	public var down = false;
 	public var start = false;
 
-	public function new() {
+	private function new() {
 
 	}
 

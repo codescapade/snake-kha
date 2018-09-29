@@ -10,11 +10,12 @@ class Snake {
 	private var head:Sprite;
 	private var body:Array<Sprite>;
 	private var currentDirection:Vector2i;
-	private var game:Game;
+	private var state:PlayState;
 
-	public function new(x:Int, y:Int, game:Game) {
-		this.game = game;
+	public function new(x:Int, y:Int, state:PlayState) {
+		this.state = state;
 		head = new Sprite(x, y, 16, 16, SNAKE_COLOR);
+		state.add(head);
 		body = [];
 		body.push(createSegment(x - 1, y));
 		body.push(createSegment(x - 2, y));
@@ -28,34 +29,47 @@ class Snake {
 			currentDirection.y = direction.y;
 		}
 
+		var lastX = head.x;
+		var lastY = head.y;
+
 		var newX = head.x + currentDirection.x;
 		var newY = head.y + currentDirection.y;
 
-		if (game.hitWall(newX, newY)) {
+		if (state.hitWall(newX, newY) || hitSelf(newX, newY)) {
 			return;
 		}
-		
-		var lastPart = body.pop();
-		lastPart.x = head.x;
-		lastPart.y = head.y;
-		body.unshift(lastPart);
+
 		head.x = newX;
 		head.y = newY;
+		
+		if (state.food.hit(newX, newY)) {
+			var segment = createSegment(lastX, lastY);
+			body.unshift(segment);
+			state.food.setRndPosition();
+		} else {
+			var lastPart = body.pop();
+			lastPart.x = lastX;
+			lastPart.y = lastY;
+			body.unshift(lastPart);
+		}		
 	}
 
-	public function render(graphics:Graphics):Void {
-		for (segment in body) {
-			segment.render(graphics);
-		}
-		head.render(graphics);
-	}
+	// public function render(graphics:Graphics):Void {
+	// 	for (segment in body) {
+	// 		segment.render(graphics);
+	// 	}
+	// 	head.render(graphics);
+	// }
 
 	public function hit(x:Int, y:Int):Bool {
 		return head.hit(x, y) || hitSelf(x, y);
 	}
 	
 	private function createSegment(x:Int, y:Int):Sprite {
-		return new Sprite(x, y, 12, 12, SNAKE_COLOR);
+		var segment = new Sprite(x, y, 12, 12, SNAKE_COLOR);
+		state.add(segment);
+		return segment;
+		// return new Sprite(x, y, 12, 12, SNAKE_COLOR);
 	}
 
 	private function invalidDirection(direction:Vector2i):Bool {
