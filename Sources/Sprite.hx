@@ -32,8 +32,12 @@ class Sprite {
 		graphics.fillRect(worldX - width * 0.5, worldY - height * 0.5, width, height);
 	}
 
+	public function hit(x:Int, y:Int):Bool {
+		return this.x == x && this.y == y;
+	}
+
 	private function get_x():Int {
-		return Math.floor((worldX + Constants.GRID_SIZE * 0.5) / Constants.GRID_SIZE);
+		return Math.floor((worldX - Constants.GRID_SIZE * 0.5) / Constants.GRID_SIZE);
 	}
 
 	private function set_x(value:Int):Int {
@@ -43,12 +47,12 @@ class Sprite {
 	}
 
 	private function get_y():Int {
-		return Math.floor((worldX + Constants.GRID_SIZE * 0.5) / Constants.GRID_SIZE);
+		return Math.floor((worldY - Constants.GRID_SIZE * 0.5) / Constants.GRID_SIZE);
 	}
 
 	private function set_y(value:Int):Int {
 		worldY = Math.floor(value * Constants.GRID_SIZE + Constants.GRID_SIZE * 0.5);
-		trace(worldY);
+		
 		return value;
 	}
 }

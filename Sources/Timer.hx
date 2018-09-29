@@ -8,8 +8,12 @@ class Timer {
 
 	private var lastTime:Float;
 
+	public function new() {
+		reset();
+	}
+
 	public function update() {
-		var currentTime:Float = Scheduler.time();
+		var currentTime = Scheduler.time();
 		detlaTime = currentTime - lastTime;
 		elapsedTime+= detlaTime;
 		lastTime = currentTime;
