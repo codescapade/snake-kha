@@ -9,13 +9,11 @@ import kha.Assets;
 class Game {
 	private var timer:Timer;
 
-	private var initialState:State;
 
 	private var currentState:State;
 
 	public function new(initialState:State) {
-		this.initialState = initialState;
-		Assets.loadEverything(loadFinished);
+		init(initialState);
 	}
 
 	public function switchState(newState:State):Void {
@@ -38,7 +36,7 @@ class Game {
 		}
 	}
 
-	private function loadFinished():Void {
+	private function init(initialState:State):Void {
 		timer = new Timer();
 
 		currentState = initialState;

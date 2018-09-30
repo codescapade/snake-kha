@@ -35,7 +35,7 @@ class Snake {
 		var newY = head.y + currentDirection.y;
 
 		if (state.hitWall(newX, newY) || hitSelf(newX, newY)) {
-			return;
+			state.game.switchState(new MenuState());
 		}
 
 		head.x = newX;

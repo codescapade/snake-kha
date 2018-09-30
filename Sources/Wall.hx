@@ -1,5 +1,6 @@
 package;
 
+import kha.graphics2.Graphics;
 import kha.Color;
 
 class Wall extends Sprite {
